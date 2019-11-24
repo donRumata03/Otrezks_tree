@@ -26,9 +26,21 @@ class Tree{
         _build(2 * v + 2, mid + 1, r);
         data[v] = data[2 * v + 1] + data[2 * v + 2];
     }
-    lint _count_sum(int l, int r){
-        
+    lint _count_sum(int v, int vl, int vr, int l, int r){
+        if (r < vl || l > vr){ // No intersection
+            return 0;
+        }
+        if (l <= vl && r >= vr){ // full intersection
+            return (lint)(data[v]);
+        }
+        // Else:
+        int mid = (vl + vr) / 2;
+        lint sum_l = _count_sum(2 * v + 1, vl, mid, l, r);
+        lint sum_r = _count_sum(2 * v + 2, mid + 1, vr, l, r);
+        return sum_l + sum_r;
     }
+    
+    
     public:
 
     int n, max_index = 0;
@@ -48,7 +60,7 @@ class Tree{
     }
 
     lint count_sum(int l, int r){
-        _count_sum(l, r);
+        return _count_sum(0, 0, n - 1, l, r);
     }
 
     void print_input(){
@@ -63,7 +75,7 @@ class Tree{
         for(int i = 0; i < max_index; i++){
             cout << data[i] << " ";
         }
-        cout << "\n";
+        cout << endl;
     }
 };
 
@@ -76,6 +88,8 @@ int main(){
     tree.input();
     tree.build();
     tree.print_data();
+
+    cout << tree.count_sum(1, 2);
 
     _getch();
     return 0;
