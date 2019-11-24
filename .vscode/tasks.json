@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "command": "g++",
+    "args": ["-g", "tree_class.cpp", "-o", "tree_class.exe  "],
+    "fileLocation": [
+        "relative",
+        "${workspaceRoot}"
+    ],
+    "problemMatchers": [],
+}

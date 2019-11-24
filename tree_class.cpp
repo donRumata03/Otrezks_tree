@@ -89,7 +89,7 @@ int main(){
     tree.build();
     tree.print_data();
 
-    cout << tree.count_sum(1, 2);
+    cout << tree.count_sum(1, 2) << endl;
 
     _getch();
     return 0;
