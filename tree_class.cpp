@@ -40,6 +40,21 @@ class Tree{
         return sum_l + sum_r;
     }
     
+    void _modify(int v, int l, int r, int index, int val){
+        if(l == r){
+            data[v] = val;
+            return;
+        }
+        int mid = (r + l) / 2;
+        int vleft = v * 2 + 1, vright = vleft + 1;
+        if (index <= mid){
+            _modify(vleft, l, mid, index, val);
+        }
+        else{
+            _modify(vright, mid + 1, r, index, val);
+        }
+        data[v] = data[vleft] + data[vright];
+    }
     
     public:
 
@@ -54,6 +69,21 @@ class Tree{
         }
     }
 
+    void input_and_process_queries(){
+        char inp_oper[3];
+        lint arg1, arg2;
+        while (cin.peek() != '\n'){
+            cin >> inp_oper >> arg1 >> arg2;
+            
+            if (inp_oper == "sum"){
+                cout << count_sum(arg1, arg2) << endl;
+            }
+            else if (inp_oper == "set"){
+                modify(arg1, arg2);
+            }
+        }
+    }
+
     void build(){
         data = new lint[4 * n];
         _build(0, 0, n - 1);
@@ -61,6 +91,10 @@ class Tree{
 
     lint count_sum(int l, int r){
         return _count_sum(0, 0, n - 1, l, r);
+    }
+
+    void modify(int index, int val){
+        _modify(0, 0, n - 1, index, val);
     }
 
     void print_input(){
@@ -72,25 +106,9 @@ class Tree{
 
     void print_data(){
         cout << "Max index: " << max_index << endl;
-        for(int i = 0; i < max_index; i++){
+        for(int i = 0; i <= max_index; i++){
             cout << data[i] << " ";
         }
         cout << endl;
     }
 };
-
-
-Tree tree;
-
-
-int main(){
-    tree = Tree();
-    tree.input();
-    tree.build();
-    tree.print_data();
-
-    cout << tree.count_sum(1, 2) << endl;
-
-    _getch();
-    return 0;
-}

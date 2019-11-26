@@ -1,10 +1,14 @@
 {
     "version": "2.0.0",
     "command": "g++",
-    "args": ["-g", "tree_class.cpp", "-o", "tree_class.exe  "],
+    "args": ["-g", "main.cpp", "-o", "main.exe"],
     "fileLocation": [
         "relative",
         "${workspaceRoot}"
     ],
     "problemMatchers": [],
+    "group": {
+        "kind": "build",
+        "isDefault": true
+    },
 }

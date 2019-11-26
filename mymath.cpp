@@ -1,3 +1,7 @@
+#ifndef MYMATH_CPP
+#define MYMATH_CPP
+
+
 int max(int a, int b){
     if (a > b){
         return a;
@@ -11,3 +15,4 @@ int min(int a, int b){
     }
     return b;
 }
+#endif
